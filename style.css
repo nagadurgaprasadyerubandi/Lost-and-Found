@@ -1,0 +1,474 @@
+/* ================= GENERAL ================= */
+body {
+    background:#f8f9fa;
+    transition:0.3s;
+}
+
+/* ================= LOGIN PAGE ================= */
+#loginPage {
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:linear-gradient(135deg,#e3f2fd,#f8f9fa,#e8f5e9);
+    position:relative;
+}
+
+/* ================= LOGIN DARK MODE BUTTON ================= */
+.login-dark-mode-btn {
+    position:absolute;
+    top:20px;
+    right:20px;
+    border:none;
+    border-radius:25px;
+    padding:10px 18px;
+    background:white;
+    color:#333;
+    font-weight:600;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-dark-mode-btn:hover {
+    transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(0,0,0,0.18);
+}
+
+/* ================= LOGIN CARD ================= */
+.login-card {
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+    border:1px solid rgba(0,0,0,0.05);
+}
+
+.login-icon {
+    width:75px;
+    height:75px;
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#0d6efd;
+    color:white;
+    font-size:32px;
+    box-shadow:0 8px 20px rgba(13,110,253,0.25);
+}
+
+.login-card h2 {
+    text-align:center;
+    font-weight:700;
+    margin-bottom:8px;
+    color:#222;
+}
+
+.login-subtitle {
+    text-align:center;
+    color:#777;
+    margin-bottom:25px;
+}
+
+/* ================= LOGIN INPUT ================= */
+.login-card .form-control {
+    height:48px;
+    border-radius:10px;
+    border:1px solid #dcdcdc;
+    padding-left:15px;
+    transition:0.3s;
+}
+
+.login-card .form-control:focus {
+    border-color:#0d6efd;
+    box-shadow:0 0 0 3px rgba(13,110,253,0.12);
+}
+
+/* ================= PASSWORD ================= */
+.password-wrapper {
+    position:relative;
+}
+
+.password-input {
+    padding-left:15px !important;
+    padding-right:45px !important;
+}
+
+.password-toggle {
+    position:absolute;
+    right:15px;
+    left:auto;
+    top:50%;
+    transform:translateY(-50%);
+    color:#777;
+    cursor:pointer;
+    z-index:10;
+    font-size:17px;
+}
+
+.password-toggle:hover {
+    color:#0d6efd;
+}
+
+/* ================= LOGIN BUTTON ================= */
+.login-card .login-btn {
+    width:100%;
+    height:48px;
+    border:none;
+    border-radius:10px;
+    background:#0d6efd;
+    color:white;
+    font-weight:600;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.login-card .login-btn:hover {
+    background:#0b5ed7;
+    transform:translateY(-1px);
+    box-shadow:0 6px 15px rgba(13,110,253,0.25);
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard-card {
+    border:none;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.dashboard-card:hover {
+    transform:translateY(-3px);
+}
+
+/* ================= RETURNED DETAILS ================= */
+.returned-details {
+    background:#f8f9fa;
+    border:1px solid #dee2e6;
+}
+
+/* ================= RETURN PHOTO ================= */
+.return-photo {
+    width:250px;
+    height:250px;
+    object-fit:cover;
+    max-width:100%;
+    border:1px solid #ddd;
+}
+
+/* ================= CLAIM POPUP ================= */
+.claim-popup {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.claim-popup-box {
+    background:white;
+    width:100%;
+    max-width:400px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.claim-popup-box h5 {
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.popup-text {
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+}
+
+/* ================= FILTER BUTTON ================= */
+.filter-wrapper {
+    position:relative;
+}
+
+.filter-btn {
+    width:42px;
+    height:42px;
+    border:1px solid #dee2e6;
+    background:white;
+    color:#333;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.filter-btn:hover {
+    background:#f1f3f5;
+    color:#0d6efd;
+}
+
+/* ================= FILTER MENU ================= */
+.filter-menu {
+    position:absolute;
+    right:0;
+    top:48px;
+    width:170px;
+    background:white;
+    border:1px solid #dee2e6;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    padding:6px;
+    display:none;
+    z-index:1000;
+}
+
+.filter-menu.show {
+    display:block;
+}
+
+.filter-menu button {
+    width:100%;
+    border:none;
+    background:transparent;
+    padding:10px 12px;
+    text-align:left;
+    border-radius:7px;
+    cursor:pointer;
+    color:#333;
+    font-size:14px;
+}
+
+.filter-menu button:hover {
+    background:#f1f3f5;
+}
+
+.filter-menu button i {
+    width:20px;
+    margin-right:6px;
+}
+
+/* ================= DARK MODE ================= */
+body.dark-mode {
+    background:#181818;
+    color:#ffffff;
+}
+
+body.dark-mode .card {
+    background:#242424;
+    color:#ffffff;
+    border-color:#3a3a3a;
+}
+
+body.dark-mode .form-control {
+    background:#303030;
+    color:white;
+    border-color:#555;
+}
+
+body.dark-mode .form-control::placeholder {
+    color:#aaa;
+}
+
+body.dark-mode .input-group-text {
+    background:#303030;
+    color:white;
+    border-color:#555;
+}
+
+/* Date icon */
+body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+    filter:invert(1);
+    cursor:pointer;
+}
+
+body.dark-mode .returned-details {
+    background:#303030;
+    border-color:#555;
+}
+
+body.dark-mode .text-muted {
+    color:#aaa !important;
+}
+
+body.dark-mode .claim-popup-box {
+    background:#242424;
+    color:white;
+}
+
+body.dark-mode .popup-text {
+    color:#bbb;
+}
+
+/* ================= DARK MODE LOGIN ================= */
+body.dark-mode #loginPage {
+    background:linear-gradient(135deg,#121212,#1b1b1b,#202124);
+}
+
+body.dark-mode .login-card {
+    background:#242424;
+    border-color:#3a3a3a;
+    box-shadow:0 15px 40px rgba(0,0,0,0.45);
+}
+
+body.dark-mode .login-card h2 {
+    color:#ffffff;
+}
+
+body.dark-mode .login-subtitle {
+    color:#bbbbbb;
+}
+
+body.dark-mode .login-card .form-control {
+    background:#303030;
+    color:white;
+    border-color:#555;
+}
+
+body.dark-mode .login-card .form-control::placeholder {
+    color:#aaaaaa;
+}
+
+body.dark-mode .login-card .form-control:focus {
+    border-color:#0d6efd;
+    background:#303030;
+    color:white;
+}
+
+body.dark-mode .login-dark-mode-btn {
+    background:#303030;
+    color:white;
+    border:1px solid #555;
+}
+
+body.dark-mode .password-toggle {
+    color:#aaa;
+}
+
+body.dark-mode .password-toggle:hover {
+    color:#0d6efd;
+}
+
+/* ================= DARK MODE FILTER ================= */
+body.dark-mode .filter-btn {
+    background:#303030;
+    color:white;
+    border-color:#555;
+}
+
+body.dark-mode .filter-btn:hover {
+    background:#3a3a3a;
+    color:#0d6efd;
+}
+
+body.dark-mode .filter-menu {
+    background:#242424;
+    border-color:#555;
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .filter-menu button {
+    color:white;
+}
+
+body.dark-mode .filter-menu button:hover {
+    background:#303030;
+}
+
+/* ================= ROLE BADGE ================= */
+#currentUserRole {
+    font-size:14px;
+    border-radius:20px;
+}
+
+/* ================= HISTORY POPUP ================= */
+.history-popup {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.history-popup-box {
+    background:white;
+    width:100%;
+    max-width:800px;
+    max-height:85vh;
+    overflow-y:auto;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.history-popup-box h5 {
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.history-item {
+    border:1px solid #dee2e6;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:10px;
+}
+
+/* ================= EDIT / DELETE BUTTONS ================= */
+.item-action-buttons {
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.item-action-buttons button {
+    flex:1;
+}
+
+/* ================= DARK MODE HISTORY ================= */
+body.dark-mode .history-popup-box {
+    background:#242424;
+    color:white;
+}
+
+body.dark-mode .history-item {
+    border-color:#555;
+    background:#303030;
+}
+
+/* ================= MOBILE NAVBAR ================= */
+@media (max-width:576px) {
+    #currentUserRole {
+        display:none;
+    }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width:576px) {
+    .login-card {
+        padding:25px;
+    }
+
+    .login-dark-mode-btn {
+        top:12px;
+        right:12px;
+        padding:8px 12px;
+        font-size:14px;
+    }
+}

@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lost & Found Management System</title>
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- ================= LOGIN PAGE ================= -->
+        <div id="loginPage">
+            <!-- Dark Mode Button -->
+            <button type="button" id="loginDarkModeBtn" class="login-dark-mode-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+            <!-- Login Card -->
+            <div class="login-card">
+                <div class="login-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h2>Lost & Found</h2>
+                    <p class="login-subtitle">Management System</p>
+                    <form onsubmit="login(event)">
+                    <!-- User-->
+                    <div class="mb-3">
+                        <label class="form-label">User</label>
+                        <select id="username" class="form-control" required>
+                            <option value="" selected disabled>Select User</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Staff">Staff</option>
+                            <option value="Finder">Finder</option>
+                            <option value="LostPerson">Lost Person</option>
+                        </select>
+                    </div>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <div class="password-wrapper">
+                            <i class="fa-solid fa-eye-slash password-toggle" id="passwordToggle" onclick="togglePassword()"></i>
+                            <input type="password" id="password" class="form-control password-input" placeholder="Enter password" required>
+                        </div>
+                    </div>
+                    <!-- Login -->
+                    <button type="submit" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+                    </form>
+                </div>
+            </div>
+            <!-- ================= MAIN APPLICATION ================= -->
+            <div id="mainApp" style="display: none;">
+                <!-- ================= NAVBAR================= -->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container">
+                    <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-magnifying-glass"></i> Lost & Found</a>
+                    <div class="d-flex gap-2 align-items-center flex-wrap">
+                        <!-- Current User Role -->
+                        <span id="currentUserRole" class="badge bg-light text-dark p-2"></span>
+                        <!-- Report History -->
+                        <button type="button" id="historyBtn" class="btn btn-light" onclick="showReportHistory()"><i class="fa-solid fa-clock-rotate-left"></i> History</button>
+                        <!-- Manage Users - Admin Only -->
+                        <button type="button" id="manageUsersBtn" class="btn btn-light" onclick="manageUsers()" style="display: none;"><i class="fa-solid fa-users"></i> Users</button>
+                        <!-- Dark Mode -->
+                        <button type="button" id="darkModeBtn" class="btn btn-light" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+                        <!-- Logout -->
+                        <button type="button" class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                    </div>
+                </div>
+                </nav>
+                <!-- ================= MAIN CONTENT ================== -->
+                <div class="container py-4">
+                    <!-- ================= DASHBOARD ================== -->
+                    <div class="row g-4 mb-4">
+                        <!-- Lost -->
+                        <div class="col-md-4">
+                            <div class="card dashboard-card shadow-sm h-100">
+                                <div class="card-body text-center">
+                                    <i class="fa-solid fa-circle-exclamation text-danger fs-1 mb-3"></i>
+                                    <h5>Lost Items</h5>
+                                    <h2 id="lostCount" class="fw-bold">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Found -->
+                        <div class="col-md-4">
+                            <div class="card dashboard-card shadow-sm h-100">
+                                <div class="card-body text-center">
+                                    <i class="fa-solid fa-box-open text-warning fs-1 mb-3"></i>
+                                    <h5>Found Items</h5>
+                                    <h2 id="foundCount" class="fw-bold">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Returned -->  
+                        <div class="col-md-4">
+                            <div class="card dashboard-card shadow-sm h-100">
+                                <div class="card-body text-center">
+                                    <i class="fa-solid fa-circle-check text-success fs-1 mb-3"></i>
+                                    <h5>Returned Items</h5>
+                                    <h2 id="returnedCount" class="fw-bold">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ================= REPORT FORMS ================== -->
+                    <div class="row g-4 mb-4 justify-content-center">
+                        <!-- ================= LOST ITEM ================== -->
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-danger text-white">
+                                    <h5 class="mb-0"><i class="fa-solid fa-triangle-exclamation"></i> Report Lost Item</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form onsubmit="addLostItem(event)">
+                                        <!-- Item Name -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Item Name</label>
+                                            <input type="text" id="lostName" class="form-control" placeholder="Enter item name" required>
+                                        </div>
+                                        <!-- Lost Item Category -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Lost Item Category</label>
+                                            <input type="text" id="lostCategory" class="form-control" placeholder="Enter lost item Category" required>
+                                        </div>
+                                        <!-- Lost Location -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Lost Location</label>
+                                            <input type="text" id="lostLocation" class="form-control" placeholder="Enter lost location" required>
+                                        </div>
+                                        <!-- Description -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Description</label>
+                                            <textarea id="lostDescription" class="form-control" placeholder="Enter item description" rows="3" required></textarea>
+                                        </div>
+                                        <!-- Item Photo -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Item Photo</label>
+                                            <div class="d-flex gap-2">
+                                                <button type="button" class="btn btn-primary" onclick="takeReportPhoto('Lost')">📷 Camera</button>
+                                                <button type="button" class="btn btn-success" onclick="uploadReportPhoto('Lost')">🖼️ Upload</button>
+                                            </div>
+                                            <small id="lostPhotoStatus" class="text-muted d-block mt-2">No photo selected.</small>
+                                        </div>
+                                        <!-- Person Name -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Person Name</label>
+                                            <input type="text" id="lostPersonName" class="form-control" placeholder="Enter person's name" required>
+                                        </div>
+                                        <!-- Phone -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input type="tel" id="lostPersonPhone" class="form-control" placeholder="Enter phone number" maxlength="10" inputmode="numeric" required>
+                                        </div>
+                                        <!-- Lost Date -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Lost Date</label>
+                                            <input type="date" id="lostDate" class="form-control" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-danger w-100"><i class="fa-solid fa-plus"></i> Report Lost Item</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ================= FOUND ITEM ================== -->
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-warning">
+                                    <h5 class="mb-0"><i class="fa-solid fa-box-open"></i> Report Found Item</h5>
+                                </div>
+                            <div class="card-body">
+                            <form onsubmit="addFoundItem(event)">
+                                <!-- Item Name -->
+                                <div class="mb-3">
+                                    <label class="form-label">Item Name</label>
+                                    <input type="text" id="foundName" class="form-control" placeholder="Enter item name" required>
+                                </div>
+                                <!-- Found Item Category -->
+                                <div class="mb-3">
+                                    <label class="form-label">Found Item Category</label>
+                                    <input type="text" id="foundCategory" class="form-control" placeholder="Enter found item Category" required>
+                                </div>
+                                <!-- Found Location -->
+                                <div class="mb-3">
+                                    <label class="form-label">Found Location</label>
+                                    <input type="text" id="foundLocation" class="form-control" placeholder="Enter found location" required>
+                                </div>
+                                <!-- Description -->
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea id="foundDescription" class="form-control" placeholder="Enter item description" rows="3" required></textarea>
+                                </div>
+                                <!-- Item Photo -->
+                                <div class="mb-3">
+                                    <label class="form-label">Item Photo</label>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-primary" onclick="takeReportPhoto('Found')">📷 Camera</button>
+                                        <button type="button" class="btn btn-success" onclick="uploadReportPhoto('Found')">🖼️ Upload</button>
+                                    </div>
+                                    <small id="foundPhotoStatus" class="text-muted d-block mt-2">No photo selected.</small>
+                                </div>
+                                <!-- Finder Name -->    
+                                <div class="mb-3">
+                                    <label class="form-label">Finder Name</label>
+                                    <input type="text" id="foundPersonName" class="form-control" placeholder="Enter finder's name" required>
+                                </div>
+                                <!-- Phone -->
+                                <div class="mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" id="foundPersonPhone" class="form-control" placeholder="Enter phone number" maxlength="10" inputmode="numeric" required>
+                                </div>
+                                <!-- Found Date --> 
+                                <div class="mb-3">
+                                    <label class="form-label">Found Date</label>
+                                    <input type="date" id="foundDate" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-warning w-100"><i class="fa-solid fa-plus"></i> Report Found Item</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ================= SEARCH ================== -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search items..." oninput="displayItems()">
+                    </div>
+                </div>
+            </div>
+            <!-- ================= ALL ITEMS + FILTER ICON ================== -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0"><i class="fa-solid fa-list"></i> All Items</h3>
+                <!-- Filter -->
+                <div class="filter-wrapper">
+                    <button type="button" class="filter-btn" onclick="toggleFilterMenu()" title="Filter Items"><i class="fa-solid fa-filter"></i></button>
+                    <div id="filterMenu" class="filter-menu">
+                        <button type="button" onclick="selectFilter('All')"><i class="fa-solid fa-list"></i> All Items</button>
+                        <button type="button" onclick="selectFilter('Lost')"><i class="fa-solid fa-circle-exclamation"></i> Lost</button>
+                        <button type="button" onclick="selectFilter('Found')"><i class="fa-solid fa-box-open"></i> Found</button>
+                        <button type="button" onclick="selectFilter('Returned')"><i class="fa-solid fa-circle-check"></i> Returned</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Items -->
+            <div id="itemsContainer" class="row g-4"></div>
+            </div>
+        </div> 
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- JavaScript -->
+        <script src="script.js"></script>
+    </body>
+</html>
